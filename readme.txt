@@ -9,3 +9,8 @@
 1.added logo as per Rahul comments.
 
 ##Commit from DEVELOP branch
+
+##NOV-23-2023-UPDATE
+1.Added new theme
+2.Updated all the content
+3.RED-GREEN CONSULTANCY information added
