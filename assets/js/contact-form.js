@@ -41,7 +41,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     let formData = new FormData(form);
     let responseMessage = document.getElementById('formMessage');
 
-    fetch('https://formsubmit.co/rgconsultancy042023@gmail.com', {
+    fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -49,21 +49,26 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         },
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
-    .then(result => {
-        responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
-        responseMessage.style.color = 'green';
-        form.reset();
-        console.log(JSON.stringify(result))
-        //alert('Success: ' + JSON.stringify(result));
+    .then(async response => {
+        const result = await response.json();
+
+        if (response.ok) {
+            responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
+            responseMessage.style.color = 'green';
+            form.reset();
+        } else {
+            responseMessage.innerHTML = `<p>There was an error: ${result.message || 'Unknown error occurred.'}</p>`;
+            responseMessage.style.color = 'red';
+        }
+        
+        console.log('Success:', result);
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     })
     .catch(error => {
-        responseMessage.innerHTML = '<p>There was an error sending your message. Please try again.</p>';
+        responseMessage.innerHTML = `<p>There was an error sending your message. Please try again. Error: ${error.message}</p>`;
         responseMessage.style.color = 'red';
-        //alert('Error: ' + JSON.stringify(error));
-        console.log(JSON.stringify(error))
+        console.error('Error:', error);
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     });
