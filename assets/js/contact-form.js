@@ -41,7 +41,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     let formData = new FormData(form);
     let responseMessage = document.getElementById('formMessage');
 
-    fetch('https://formsubmit.co/rgconsultancy042023@gmail.com', {
+    fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
