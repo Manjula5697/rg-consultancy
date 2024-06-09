@@ -40,6 +40,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     let form = event.target;
     let formData = new FormData(form);
     let responseMessage = document.getElementById('formMessage');
+    const urlEncodedData = new URLSearchParams(formData).toString();
 
     fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
         method: 'POST',
@@ -47,7 +48,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: formData
+        body: urlEncodedData
     })
     .then(async response => {
         const result = await response.json();
