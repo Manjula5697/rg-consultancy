@@ -47,7 +47,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: formData
     })
     .then(response => response.json())
     .then(result => {
