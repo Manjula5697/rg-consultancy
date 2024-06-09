@@ -1,3 +1,14 @@
+document.getElementById('phone').addEventListener('input', function(event) {
+    let phoneInput = event.target;
+    let phoneValue = phoneInput.value;
+
+    if (!/^\d+$/.test(phoneValue) || phoneValue.length !== 10) {
+        phoneInput.setCustomValidity('Please enter a valid 10-digit mobile number.');
+    } else {
+        phoneInput.setCustomValidity('');
+    }
+});
+
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -11,6 +22,11 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         return;
     }
 
+    if (!/^\d+$/.test(phone)) {
+        alert('Please enter a valid mobile number.');
+        return;
+    }
+
     let form = event.target;
     let formData = new FormData(form);
     let xhr = new XMLHttpRequest();
@@ -21,7 +37,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         if (xhr.readyState === XMLHttpRequest.DONE) {
             let responseMessage = document.getElementById('formMessage');
             if (xhr.status === 200) {
-                responseMessage.innerHTML = '<p>Thank you! Your message has been sent.</p>';
+                responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
                 responseMessage.style.color = 'green';
                 form.reset();
             } else {
