@@ -68,7 +68,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     .catch(error => {
         responseMessage.innerHTML = `<p>There was an error sending your message. Please try again. Error: ${error.message}</p>`;
         responseMessage.style.color = 'red';
-        console.error('Error:', error);
+        console.error('Error:', result);
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     });
