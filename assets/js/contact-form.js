@@ -40,37 +40,29 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     let form = event.target;
     let formData = new FormData(form);
     let responseMessage = document.getElementById('formMessage');
-    const urlEncodedData = new URLSearchParams(formData).toString();
 
-    fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
+    fetch('https://formsubmit.co/rgconsultancy042023@gmail.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: urlEncodedData
+        body: JSON.stringify(formData)
     })
-    .then(async response => {
-        const result = await response.json();
-        console.log(result)
-
-        if (response.ok) {
-            responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
-            responseMessage.style.color = 'green';
-            form.reset();
-        } else {
-            responseMessage.innerHTML = `<p>There was an error: ${result.message || 'Unknown error occurred.'}</p>`;
-            responseMessage.style.color = 'red';
-        }
-        
-        console.log('Success:', result);
+    .then(response => response.json())
+    .then(result => {
+        responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
+        responseMessage.style.color = 'green';
+        form.reset();
+        console.log(JSON.stringify(result))
+        //alert('Success: ' + JSON.stringify(result));
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     })
     .catch(error => {
-        responseMessage.innerHTML = `<p>There was an error sending your message. Please try again. Error: ${error.message}</p>`;
+        responseMessage.innerHTML = '<p>There was an error sending your message. Please try again.</p>';
         responseMessage.style.color = 'red';
-        console.error('Error:', error);
+        //alert('Error: ' + JSON.stringify(error));
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     });
