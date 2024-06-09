@@ -54,6 +54,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
         responseMessage.style.color = 'green';
         form.reset();
+        console.log(JSON.stringify(result))
         //alert('Success: ' + JSON.stringify(result));
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
@@ -62,6 +63,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
         responseMessage.innerHTML = '<p>There was an error sending your message. Please try again.</p>';
         responseMessage.style.color = 'red';
         //alert('Error: ' + JSON.stringify(error));
+        console.log(JSON.stringify(error))
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     });
