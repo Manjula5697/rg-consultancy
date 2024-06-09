@@ -41,16 +41,17 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     let formData = new FormData(form);
     let responseMessage = document.getElementById('formMessage');
 
-    fetch('https://formsubmit.co/rgconsultancy042023@gmail.com', {
+    fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: formData
     })
     .then(async response => {
         const result = await response.json();
+        console.log(result)
 
         if (response.ok) {
             responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
