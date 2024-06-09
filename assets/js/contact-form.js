@@ -31,7 +31,7 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     let formData = new FormData(form);
     let xhr = new XMLHttpRequest();
 
-    xhr.open('POST', 'https://formsubmit.co/kmanjula5697@gmail.com,rahulniraimathi@gmail.com,rgconsultancy042023@gmail.com');
+    xhr.open('POST', 'https://formsubmit.co/rgconsultancy042023@gmail.com');
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.onreadystatechange = function() {
         if (xhr.readyState === XMLHttpRequest.DONE) {
