@@ -2,7 +2,13 @@ document.getElementById('phone').addEventListener('input', function(event) {
     let phoneInput = event.target;
     let phoneValue = phoneInput.value;
 
-    if (!/^\d+$/.test(phoneValue) || phoneValue.length !== 10) {
+    // Limit the input to 10 digits
+    if (phoneValue.length > 10) {
+        phoneInput.value = phoneValue.slice(0, 10);
+    }
+
+    // Validate the phone number
+    if (!/^\d{10}$/.test(phoneInput.value)) {
         phoneInput.setCustomValidity('Please enter a valid 10-digit mobile number.');
     } else {
         phoneInput.setCustomValidity('');
@@ -11,6 +17,10 @@ document.getElementById('phone').addEventListener('input', function(event) {
 
 document.getElementById('contactForm').addEventListener('submit', function(event) {
     event.preventDefault();
+
+    let submitButton = event.target.querySelector('button[type="submit"]');
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
 
     let name = document.getElementById('name').value;
     let phone = document.getElementById('phone').value;
@@ -44,6 +54,8 @@ document.getElementById('contactForm').addEventListener('submit', function(event
                 responseMessage.innerHTML = '<p>There was an error sending your message. Please try again.</p>';
                 responseMessage.style.color = 'red';
             }
+            submitButton.textContent = 'Send';
+            submitButton.disabled = false;
         }
     };
     xhr.send(formData);
