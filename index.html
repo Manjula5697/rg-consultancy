@@ -411,8 +411,9 @@
                 <div class="col-md-7 pt-5">
                     <div class="container">
                         <div class="contact-form shadow">
+                            <div id="formMessage"></div>
                             <h4 class="form-title">Fill this, we will get back to you soon!</h4>
-                            <form id="contactForm" action="https://formsubmit.co/kmanjula5697@gmail.com" method="POST">
+                            <form id="contactForm" action="" method="POST">
                                 <label for="name">Name:</label>
                                 <input type="text" id="name" name="name" required>
                                 <label for="phone">Phone Number:</label>
@@ -421,6 +422,7 @@
                                 <input type="email" id="email" name="email" required>
                                 <label for="message">Message:</label>
                                 <textarea id="message" name="message" required></textarea>
+                                <input type="hidden" name="_captcha" value="false">
                                 <button type="submit">Send</button>
                             </form>
                         </div>
