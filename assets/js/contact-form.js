@@ -22,47 +22,33 @@ document.getElementById('contactForm').addEventListener('submit', function(event
     submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
 
-    let name = document.getElementById('name').value;
-    let phone = document.getElementById('phone').value;
-    let email = document.getElementById('email').value;
-    let message = document.getElementById('message').value;
-
-    if (!name || !phone || !email || !message) {
-        alert('Please fill in all fields.');
-        return;
-    }
-
-    if (!/^\d+$/.test(phone)) {
-        alert('Please enter a valid mobile number.');
-        return;
-    }
-
     let form = event.target;
     let formData = new FormData(form);
     let responseMessage = document.getElementById('formMessage');
 
     fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
         body: formData
     })
     .then(response => response.json())
     .then(result => {
-        responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
-        responseMessage.style.color = 'green';
-        form.reset();
-        console.log(JSON.stringify(result))
-        //alert('Success: ' + JSON.stringify(result));
+        if (result.success) {
+            responseMessage.innerHTML = '<p class="response-msg-paragraph">We\'ve got your message! Our team will reach out to you shortly.</p>';
+            responseMessage.style.color = 'green';
+            form.reset();
+        } else {
+            responseMessage.innerHTML = `<p>There was an error: ${result.message || 'Unknown error occurred.'}</p>`;
+            responseMessage.style.color = 'red';
+        }
+
+        console.log('Success:', result);
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     })
     .catch(error => {
-        responseMessage.innerHTML = '<p>There was an error sending your message. Please try again.</p>';
+        responseMessage.innerHTML = `<p>There was an error sending your message. Please try again. Error: ${error.message}</p>`;
         responseMessage.style.color = 'red';
-        //alert('Error: ' + JSON.stringify(error));
+        console.error('Error:', error);
         submitButton.textContent = 'Send';
         submitButton.disabled = false;
     });
