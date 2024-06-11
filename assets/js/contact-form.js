@@ -28,6 +28,10 @@ document.getElementById('contactForm').addEventListener('submit', function(event
 
     fetch('https://formsubmit.co/ajax/rgconsultancy042023@gmail.com', {
         method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Importance': 'high'
+        },
         body: formData
     })
     .then(response => response.json())
